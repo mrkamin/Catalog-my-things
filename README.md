@@ -32,18 +32,13 @@
 
 ## 🛠 Built With <a name="built-with"></a>
 
-### Tech Stack <a name="tech-stack"></a>
-
-<details>
-  <summary>Backend</summary>
-  <br />
     ![](https://img.shields.io/badge/-Ruby-red)
     ![](https://img.shields.io/badge/-VSCode-blue)
     ![](https://img.shields.io/badge/-Rspec-red)
     - Visual Studio Code
     - Ruby
     - Rspec
-</details>
+
 
  ## App ScreenShot
   ![](./app_ss.JPG)
