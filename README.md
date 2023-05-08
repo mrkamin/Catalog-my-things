@@ -30,14 +30,13 @@
 
 > This is the Catalog of my things app initiated in the fifth week of the fourth module in the Microverse program. It is a simple database app to catalog entertainment content (Books, Music, Games).
 
-## 🛠 Built With <a name="built-with"></a>
-
-    ![](https://img.shields.io/badge/-Ruby-red)
-    ![](https://img.shields.io/badge/-VSCode-blue)
-    ![](https://img.shields.io/badge/-Rspec-red)
-    - Visual Studio Code
-    - Ruby
-    - Rspec
+## Built With
+![](https://img.shields.io/badge/-Ruby-red)
+![](https://img.shields.io/badge/-VSCode-blue)
+![](https://img.shields.io/badge/-Rspec-red)
+- Visual Studio Code
+- Ruby
+- Rspec
 
 
  ## App ScreenShot
