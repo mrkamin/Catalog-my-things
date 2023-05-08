@@ -40,7 +40,7 @@
 
 
  ## App ScreenShot
-  ![](./app_ss.JPG)
+  ![](Comming Soon)
  ## Video Preview
 
  [Video](Comming Soon)
