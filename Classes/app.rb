@@ -1,37 +1,36 @@
+class App
+  def initialize
+    print_menu
+  end
 
+  def options
+    {
+      1 => { text: 'List of all Books', action: proc { list_books } },
+      2 => { text: 'List of all music', action: proc do
+                                                  list_albums
+                                                  puts 'Press enter to continue'
+                                                  gets.chomp
+                                                end },
+      3 => { text: 'List of all games', action: proc { list_games } },
+      4 => { text: 'List of all genres', action: proc { list_genres } },
+      5 => { text: 'List of all labels', action: proc { list_labels } },
+      6 => { text: 'List of all Authors', action: proc { list_authors } },
+      7 => { text: 'Add a book', action: proc { add_book } },
+      8 => { text: 'Add a music', action: proc { add_album } },
+      9 => { text: 'Add a game', action: proc { add_game } },
+      10 => { text: 'Add a label', action: proc { add_label } },
+      11 => { text: 'Add a genre', action: proc { add_genre } },
+      12 => { text: 'Exit from App' }
+    }
+  end
 
- class App 
-     def initialize
-         print_menu
-       end
-     def options
-         {
-           1 => { text: 'List of all Books', action: proc { list_books } },
-           2 => { text: 'List of all music', action: proc do
-                                                           list_albums
-                                                           puts 'Press enter to continue'
-                                                           gets.chomp
-                                                         end },
-           3 => { text: 'List of all games', action: proc { list_games } },
-           4 => { text: 'List of all genres', action: proc { list_genres } },
-           5 => { text: 'List of all labels', action: proc { list_labels } },
-           6 => { text: 'List of all Authors', action: proc { list_authors } },
-           7 => { text: 'Add a book', action: proc { add_book } },
-           8 => { text: 'Add a music', action: proc { add_album } },
-           9 => { text: 'Add a game', action: proc { add_game } },
-           10 => { text: 'Add a label', action: proc { add_label } },
-           11 => { text: 'Add a genre', action: proc { add_genre } },
-           12 => { text: 'Exit from App' }
-         }
-       end
-       def print_menu
-         loop do
-           options.each { |k, v| print "#{k} - #{v[:text]} \n" }
-           choice = gets.chomp.to_i
-          
-         end
-       end
-       def choice_menu(choice)
-        
-       end
-     end
+  def print_menu
+    loop do
+      options.each { |k, v| print "#{k} - #{v[:text]} \n" }
+      choice = gets.chomp.to_i
+      choice_menu(choice)
+    end
+  end
+
+  def choice_menu(choice); end
+end
