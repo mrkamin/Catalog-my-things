@@ -37,6 +37,14 @@ class App
   def choice_menu(choice); end
 
   def add_author
+    puts 'Enter First Name: '
+    first_name = gets.chomp
+
+    puts 'Enter Last Name: '
+    last_name = gets.chomp
+
+    @authors << Author.new(first_name, last_name)
+    puts 'Add author successful!'
   end
 
   def list_authors
