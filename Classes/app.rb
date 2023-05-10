@@ -40,7 +40,6 @@ class App
   def add_author
     puts 'Enter First Name: '
     first_name = gets.chomp
-
     puts 'Enter Last Name: '
     last_name = gets.chomp
 
@@ -53,6 +52,20 @@ class App
     @authors.each do |author|
       puts "ID: #{author.id}, Name: #{author.first_name} #{author.last_name}"
     end
+  end
+
+  def add_game
+    puts 'Enter Game Name: '
+    label = gets.chomp
+    puts 'Enter Publish Year: '
+    publish_date = gets.chomp
+    puts 'Enter Multiplayer: [Y/N]'
+    multiplayer = gets.chomp
+    puts 'Enter Last played Year: '
+    last_played_at = gets.chomp
+
+    @games << Game.new(label, publish_date, multiplayer, last_played_at)
+    puts 'Add game succeessful!'
   end
 
   def list_games
