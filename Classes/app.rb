@@ -1,6 +1,7 @@
 class App
   def initialize
     @authors = []
+    @games = []
     print_menu
   end
 
@@ -51,6 +52,13 @@ class App
     puts 'Oops, no authors registered yet!' if @authors.empty?
     @authors.each do |author|
       puts "ID: #{author.id}, Name: #{author.first_name} #{author.last_name}"
+    end
+  end
+
+  def list_games
+    puts 'Oops, no games created yet!' if @games.empty?
+    @games.each do |game|
+      puts "ID: #{game.id}, Label: #{game.label}, Publish Date: #{game.publish_date}, Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
     end
   end
 end
