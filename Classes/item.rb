@@ -9,10 +9,12 @@ class Item
     @source = source
     @label = label
     @publish_date = publish_date
-    @archived = []
+    @archived = archived
   end
 
-  def move_to_archive; end
+  def move_to_archive
+    archived = true if can_be_archived?
+  end
 
   private
 
