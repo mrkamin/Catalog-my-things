@@ -1,4 +1,4 @@
 class Label
-  attr_accessor :color, :title
+  attr_accessor :title, :color
   attr_reader :items
 end

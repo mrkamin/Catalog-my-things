@@ -1,23 +1,22 @@
-class Item
-  attr_reader :id
-  attr_accessor :genre, :author, :source, :label, :publish_date, :archived
+require 'date'
 
-  def initialize(genre, author, source, label, publish_date)
-    @id = Random.rand(1..1000)
-    @genre = genre
-    @author = author
-    @source = source
-    @label = label
+class Item
+  attr_accessor :publish_date, :archived
+  attr_reader :id
+
+  def initialize(publish_date)
+    @id = rand(1..1000)
     @publish_date = publish_date
-    @archived = []
+    @archived = false
   end
 
-  def move_to_archive; end
+  def move_to_archive
+    @archived = can_be_archived?
+  end
 
   private
 
   def can_be_archived?
-    present_date = Time.now
-    present_date - publish_date > 10
+    Date.today - Date.parse(@publish_date) > 10 * 365
   end
 end
