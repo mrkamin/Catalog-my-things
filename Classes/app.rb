@@ -1,5 +1,6 @@
 class App
   def initialize
+    @authors = []
     print_menu
   end
 
@@ -20,7 +21,8 @@ class App
       9 => { text: 'Add a game', action: proc { add_game } },
       10 => { text: 'Add a label', action: proc { add_label } },
       11 => { text: 'Add a genre', action: proc { add_genre } },
-      12 => { text: 'Exit from App' }
+      12 => { text: 'Add an author', action: proc { add_author } },
+      13 => { text: 'Exit from App' }
     }
   end
 
@@ -33,4 +35,14 @@ class App
   end
 
   def choice_menu(choice); end
+
+  def add_author
+  end
+
+  def list_authors
+    puts 'Oops, no authors registered yet!' if @authors.empty?
+    @authors.each do |author|
+      puts "ID: #{author.id}, Name: #{author.first_name} #{author.last_name}"
+    end
+  end
 end
