@@ -6,12 +6,12 @@ require_relative './label'
 require_relative './genre'
 require_relative './author'
 require_relative './source'
-
+# rubocop:disable Metrics/ClassLength
 class App
   def initialize
     @things = Catalog.new
     read_all_data
-    print_chose_menu_list
+    print_chose_list
   end
 
   def enter_date
@@ -37,6 +37,17 @@ class App
     @things.labels[input.to_i] unless @things.labels[input.to_i].nil?
   end
 
+  def choos_source(choos: false)
+    list_sources(choos: choos)
+    puts 'choos a Source or type "n" for a new Source'
+    input = gets.chomp
+    if input.downcase == 'n'
+      add_source
+      return @things.sources.last
+    end
+    @things.sources[input.to_i] unless @things.labels[input.to_i].nil?
+  end
+
   def add_book
     puts 'Please fill below book data:'
     puts 'Publish date:'
@@ -48,6 +59,8 @@ class App
     book = Book.new(publish_date, publisher, cover_state)
     label = choos_label(choos: true)
     book.label = label if label.is_a? Label
+    source = choos_source(choos: true)
+    book.source = source if source.is_a? Source
     @things.add_book(book)
     puts 'Book added successfuly'
     puts 'Press enter to continue'
@@ -64,6 +77,16 @@ class App
     gets.chomp
   end
 
+  def add_source
+    puts 'Please add a Scourc'
+    print 'Book_source: '
+    book_source = gets.chomp
+    @things.add_source(Source.new(book_source))
+    puts 'Source added Successful'
+    puts 'press Enter to Continue'
+    gets.chomp
+  end
+
   def list(list)
     list.each_with_index do |item, idx|
       print "#{idx}-"
@@ -77,6 +100,7 @@ class App
       @things.add_book(Book.new(item['publish_date'], item['publisher'], item['cover_state']))
     end
     read_list('labels.json') { |item| @things.add_label(Label.new(item['title'])) }
+    read_list('sources.json') { |item| @things.add_source(Source.new(item['book_source'])) }
   end
 
   def read_list(file_name, &block)
@@ -90,6 +114,7 @@ class App
   def save_data
     save_list('books.json', @things.books)
     save_list('labels.json', @things.labels)
+    save_list('sources.json', @things.sources)
   end
 
   def save_list(file_name, list)
@@ -122,17 +147,29 @@ class App
     gets.chomp
   end
 
+  def list_sources(choos: false)
+    puts '***---------Sources List--------***'
+    list(@things.sources)
+    puts '***---End of the Sources list---***'
+    return if choos
+
+    puts 'Press Enter to Continue'
+    gets.chomp
+  end
+
   def options
     {
       1 => { text: 'List all books', action: proc { list_books } },
       2 => { text: 'List all Labels', action: proc { list_labels } },
-      3 => { text: 'Add a Book', action: proc { add_book } },
-      4 => { text: 'Add a Label', action: proc { add_label } },
-      5 => { text: 'Exit App' }
+      3 => { text: 'List all Sources', action: proc { list_sources } },
+      4 => { text: 'Add a Book', action: proc { add_book } },
+      5 => { text: 'Add a Label', action: proc { add_label } },
+      6 => { text: 'Add a Source', action: proc { add_source } },
+      7 => { text: 'Exit App' }
     }
   end
 
-  def print_chose_menu_list
+  def print_chose_list
     loop do
       options.each { |k, v| print "#{k} - #{v[:text]} \n" }
       choice = gets.chomp.to_i
@@ -153,3 +190,4 @@ class App
     options[choice][:action].call
   end
 end
+# rubocop:enable Metrics/ClassLength
