@@ -17,7 +17,7 @@ class Item
   private
 
   def can_be_archived?
-    present_date = Time.now
+    present_date = Time.now.year
     present_date - publish_date > 10
   end
 end
