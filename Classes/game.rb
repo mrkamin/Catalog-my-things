@@ -1,4 +1,18 @@
-class Game
-  attr_accessor :multiplayer, :last_played, :publish_date
-  attr_reader :id
+require './item'
+
+class Game < Item
+  attr_accessor :multiplayer, :last_played_at, :publish_date
+
+  def initialize(genre, author, source, label, publish_date, multiplayer, last_played_at)
+    super(genre, author, source, label, publish_date)
+    @multiplayer = multiplayer
+    @last_played_at = last_played_at
+  end
+
+  private
+
+  def can_be_archived?
+    present_date = Time.now.year
+    Item.can_be_archived? && present_date - last_played_at > 2
+  end
 end
