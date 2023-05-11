@@ -1,3 +1,6 @@
+require_relative './author'
+require_relative './game'
+
 class App
   def initialize
     @authors = []
@@ -23,7 +26,7 @@ class App
       10 => { text: 'Add a label', action: proc { add_label } },
       11 => { text: 'Add a genre', action: proc { add_genre } },
       12 => { text: 'Add an author', action: proc { add_author } },
-      13 => { text: 'Exit from App' }
+      0 => { text: 'Exit from App' }
     }
   end
 
@@ -35,7 +38,23 @@ class App
     end
   end
 
-  def choice_menu(choice); end
+  def choice_menu(choice)
+    case choice
+    when 3
+      list_games
+    when 9
+      add_game
+    when 6
+      list_authors
+    when 12
+      add_author
+    when 0
+      puts 'Thank you for using this app!'
+      exit
+    else
+      puts 'Invalid choice!'
+    end
+  end
 
   def add_author
     puts 'Enter First Name: '
@@ -55,23 +74,24 @@ class App
   end
 
   def add_game
-    puts 'Enter Game Name: '
-    label = gets.chomp
     puts 'Enter Publish Year: '
     publish_date = gets.chomp
     puts 'Enter Multiplayer: [Y/N]'
-    multiplayer = gets.chomp
+    multiplayer_choice = gets.chomp.downcase
+    multiplayer = true if multiplayer_choice = 'y'
+    multiplayer = false if multiplayer_choice = 'n'
     puts 'Enter Last played Year: '
     last_played_at = gets.chomp
 
-    @games << Game.new(label, publish_date, multiplayer, last_played_at)
+    @games << Game.new(publish_date, multiplayer, last_played_at)
     puts 'Add game succeessful!'
   end
 
   def list_games
     puts 'Oops, no games created yet!' if @games.empty?
     @games.each do |game|
-      puts "ID: #{game.id}, Label: #{game.label}, Publish Date: #{game.publish_date}, Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
+      puts "ID: #{game.id}, Publish Date: #{game.publish_date}, "
+      puts "Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
     end
   end
 end

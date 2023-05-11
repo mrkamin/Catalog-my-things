@@ -1,4 +1,4 @@
-require_relative './Classes/app'
+require './Classes/app'
 
 def main
   puts '********-------------------------********'
