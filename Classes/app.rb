@@ -3,14 +3,16 @@ require 'json'
 require_relative './catalog'
 require_relative './book'
 require_relative './label'
+require_relative './genre'
 require_relative './author'
 require_relative './source'
+require_relative './music'
 
 # modules
-require_relative '../modules/menu'
-require_relative '../modules/list_all_music_album'
-require_relative '../modules/list_all_genres'
-require_relative '../modules/add_music_album'
+require_relative './modules/menu'
+require_relative './modules/list_all_music_album'
+require_relative './modules/list_all_genres'
+require_relative './modules/add_music_album'
 
 ACTIONS = {
   1 => :list_all_musics,
@@ -58,17 +60,18 @@ class App
     end
   end
 
-  def add_book
-    puts 'Please fill below book data:'
+  def add_music
+    puts 'Please fill below music data:'
     puts 'Publish date:'
     publish_date = enter_date
-    puts 'Publisher:'
-    publisher = gets.chomp
-    puts 'Cover state:'
-    cover_state = gets.chomp
-    book = Book.new(publish_date, publisher, cover_state)
-    @things.add_book(book)
-    puts 'Book added successfuly'
+    puts 'name:'
+    name = gets.chomp
+    puts 'Is it Spotify? [y/n]:'
+    it_is = gets[0].capitalize
+    it_is = (it_is == 'Y')
+    music = Music.new(name, publish_date, it_is)
+    @things.add_music(music)
+    puts 'Music added successfuly'
     puts 'Press enter to continue'
     gets.chomp
   end
@@ -82,8 +85,8 @@ class App
   end
 
   def read_all_data
-    read_list('books.json') do |item|
-      @things.add_book(Book.new(item['publish_date'], item['publisher'], item['cover_state']))
+    read_list('musics.json') do |item|
+      @things.add_music(Music.new(item['publish_date'], item['name'], item['spotify']))
     end
   end
 
@@ -96,7 +99,7 @@ class App
   end
 
   def save_data
-    save_list('books.json', @things.books)
+    save_list('musics.json', @things.musics)
   end
 
   def save_list(file_name, list)
@@ -111,9 +114,9 @@ class App
     end
   end
 
-  def list_books
-    puts '------------Books List-----------'
-    list(@things.books)
+  def list_musics
+    puts '------------Musics List-----------'
+    list(@things.musics)
     puts '----------End of the List----------'
     puts 'Press enter to continue'
     gets.chomp
@@ -121,8 +124,8 @@ class App
 
   def options
     {
-      1 => { text: 'List all books', action: proc { list_books } },
-      2 => { text: 'Add a Book', action: proc { add_book } },
+      1 => { text: 'List all Musics', action: proc { list_musics } },
+      2 => { text: 'Add a Music', action: proc { add_music } },
       3 => { text: 'Exit App' }
     }
   end

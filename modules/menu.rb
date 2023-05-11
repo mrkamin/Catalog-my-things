@@ -1,6 +1,6 @@
 module Menu
-    def desplay_menu
-      puts "
+  def desplay_menu
+    puts "
       Choose a number
       \n 1 - List all music albums
       \n 2 - List all genres (e.g 'Comedy', 'Thriller')
@@ -10,5 +10,5 @@ module Menu
       \n 6 - Add a music album
       \n 7 - Exit
       "
-    end
   end
+end

@@ -1,11 +1,11 @@
 class Catalog
-  attr_reader :books
+  attr_reader :musics
 
   def initialize
-    @books = []
+    @musics = []
   end
 
-  def add_book(book)
-    @books << book
+  def add_music(music)
+    @musics << music
   end
 end
