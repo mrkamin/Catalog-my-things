@@ -6,12 +6,46 @@ require_relative './label'
 require_relative './genre'
 require_relative './author'
 require_relative './source'
-# rubocop:disable Metrics/ClassLength
+require_relative './music'
+
+# modules
+require_relative '../modules/menu'
+require_relative '../modules/list_all_music_album'
+require_relative '../modules/list_all_genres'
+require_relative '../modules/add_music_album'
+
+ACTIONS = {
+  1 => :list_all_musics,
+  2 => :list_all_genres,
+  3 => :add_a_music
+}.freeze
+
 class App
+  include Menu
+  include AddMusicAlbum
+  include ListAllGenres
+  include ListAllMusics
+  def run
+    choice = 0
+
+    while choice != 5
+      desplay_menu
+      choice = gets.chomp.to_i
+
+      if choice == 4
+        puts " \n Thanks for using catalog\n"
+        exit
+      end
+      user_choice = ACTIONS[choice]
+
+      method(user_choice).call
+    end
+  end
+
   def initialize
     @things = Catalog.new
     read_all_data
-    print_chose_list
+    print_chose_menu_list
   end
 
   def enter_date
@@ -26,64 +60,19 @@ class App
     end
   end
 
-  def choos_label(choos: false)
-    list_labels(choos: choos)
-    puts 'Choos a label or type "n" for a new label'
-    input = gets.chomp
-    if input.downcase == 'n'
-      add_label
-      return @things.labels.last
-    end
-    @things.labels[input.to_i] unless @things.labels[input.to_i].nil?
-  end
-
-  def choos_source(choos: false)
-    list_sources(choos: choos)
-    puts 'choos a Source or type "n" for a new Source'
-    input = gets.chomp
-    if input.downcase == 'n'
-      add_source
-      return @things.sources.last
-    end
-    @things.sources[input.to_i] unless @things.labels[input.to_i].nil?
-  end
-
-  def add_book
-    puts 'Please fill below book data:'
+  def add_music
+    puts 'Please fill below music data:'
     puts 'Publish date:'
     publish_date = enter_date
-    puts 'Publisher:'
-    publisher = gets.chomp
-    puts 'Cover state:'
-    cover_state = gets.chomp
-    book = Book.new(publish_date, publisher, cover_state)
-    label = choos_label(choos: true)
-    book.label = label if label.is_a? Label
-    source = choos_source(choos: true)
-    book.source = source if source.is_a? Source
-    @things.add_book(book)
-    puts 'Book added successfuly'
+    puts 'name:'
+    name = gets.chomp
+    puts 'Is it Spotify? [y/n]:'
+    it_is = gets[0].capitalize
+    it_is = (it_is == 'Y')
+    music = Music.new(name, publish_date, it_is)
+    @things.add_music(music)
+    puts 'Music added successfuly'
     puts 'Press enter to continue'
-    gets.chomp
-  end
-
-  def add_label
-    puts 'Please add a label:'
-    print 'Title: '
-    title = gets.chomp
-    @things.add_label(Label.new(title))
-    puts 'Label added successful'
-    puts 'Press Enter to continue'
-    gets.chomp
-  end
-
-  def add_source
-    puts 'Please add a Scourc'
-    print 'Book_source: '
-    book_source = gets.chomp
-    @things.add_source(Source.new(book_source))
-    puts 'Source added Successful'
-    puts 'press Enter to Continue'
     gets.chomp
   end
 
@@ -96,11 +85,9 @@ class App
   end
 
   def read_all_data
-    read_list('books.json') do |item|
-      @things.add_book(Book.new(item['publish_date'], item['publisher'], item['cover_state']))
+    read_list('musics.json') do |item|
+      @things.add_music(Music.new(item['publish_date'], item['name'], item['spotify']))
     end
-    read_list('labels.json') { |item| @things.add_label(Label.new(item['title'])) }
-    read_list('sources.json') { |item| @things.add_source(Source.new(item['book_source'])) }
   end
 
   def read_list(file_name, &block)
@@ -112,9 +99,7 @@ class App
   end
 
   def save_data
-    save_list('books.json', @things.books)
-    save_list('labels.json', @things.labels)
-    save_list('sources.json', @things.sources)
+    save_list('musics.json', @things.musics)
   end
 
   def save_list(file_name, list)
@@ -129,47 +114,23 @@ class App
     end
   end
 
-  def list_books
-    puts '------------Books List-----------'
-    list(@things.books)
+  def list_musics
+    puts '------------Musics List-----------'
+    list(@things.musics)
     puts '----------End of the List----------'
     puts 'Press enter to continue'
     gets.chomp
   end
 
-  def list_labels(choos: false)
-    puts '***--------Labels List-----------***'
-    list(@things.labels)
-    puts '***----End of the label list-----***'
-    return if choos
-
-    puts 'Press Enter to Continue'
-    gets.chomp
-  end
-
-  def list_sources(choos: false)
-    puts '***---------Sources List--------***'
-    list(@things.sources)
-    puts '***---End of the Sources list---***'
-    return if choos
-
-    puts 'Press Enter to Continue'
-    gets.chomp
-  end
-
   def options
     {
-      1 => { text: 'List all books', action: proc { list_books } },
-      2 => { text: 'List all Labels', action: proc { list_labels } },
-      3 => { text: 'List all Sources', action: proc { list_sources } },
-      4 => { text: 'Add a Book', action: proc { add_book } },
-      5 => { text: 'Add a Label', action: proc { add_label } },
-      6 => { text: 'Add a Source', action: proc { add_source } },
-      7 => { text: 'Exit App' }
+      1 => { text: 'List all Musics', action: proc { list_musics } },
+      2 => { text: 'Add a Music', action: proc { add_music } },
+      3 => { text: 'Exit App' }
     }
   end
 
-  def print_chose_list
+  def print_chose_menu_list
     loop do
       options.each { |k, v| print "#{k} - #{v[:text]} \n" }
       choice = gets.chomp.to_i
@@ -190,4 +151,3 @@ class App
     options[choice][:action].call
   end
 end
-# rubocop:enable Metrics/ClassLength

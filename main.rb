@@ -1,4 +1,5 @@
 require_relative './Classes/app'
+require_relative './modules/menu'
 
 def main
   puts '********-------------------------********'
