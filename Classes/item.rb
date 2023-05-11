@@ -25,18 +25,3 @@ class Item
     Date.today - Date.parse(@publish_date) > 10 * 365
   end
 end
-   
-
- 
- 
-
-
-    
-
-
- 
-
- 
-
-
- 

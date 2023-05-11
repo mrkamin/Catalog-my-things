@@ -151,4 +151,3 @@ class App
     options[choice][:action].call
   end
 end
-
