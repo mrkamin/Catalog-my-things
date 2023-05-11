@@ -15,4 +15,11 @@ class Author
     item.author = self
     @items << item
   end
+
+  def as_hash
+    {
+      'first_name' => @first_name,
+      'last_name' => @last_name
+    }
+  end
 end

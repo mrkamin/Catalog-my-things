@@ -9,10 +9,22 @@ class Game < Item
     @last_played_at = last_played_at
   end
 
+  def as_hash
+    {
+      'id' => @id,
+      'label' => @label.nil? ? '' : @label.as_hash,
+      'source' => @source.nil? ? '' : @source.as_hash,
+      'archived' => @archived,
+      'multiplayer' => @multiplayer,
+      'last_played_at' => @last_played_at,
+      'publish_date' => @publish_date
+    }
+  end
+
   private
 
   def can_be_archived?
     present_date = Time.now.year
-    Item.can_be_archived? && present_date - last_played_at > 2
+    super && present_date - last_played_at > 2
   end
 end

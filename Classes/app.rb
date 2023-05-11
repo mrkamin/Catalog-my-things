@@ -14,9 +14,6 @@ class App
     @things = Catalog.new
     read_all_data
     print_chose_list
-    @authors = []
-    @games = []
-    print_menu
   end
 
   def enter_date
@@ -235,15 +232,26 @@ class App
     puts 'Enter Last Name: '
     last_name = gets.chomp
 
-    @authors << Author.new(first_name, last_name)
+    # @authors << Author.new(first_name, last_name)
+    @things.add_author(Author.new(first_name, last_name))
     puts 'Add author successful!'
+    puts 'Press Enter to continue'
+    gets.chomp
   end
 
   def list_authors
-    puts 'Oops, no authors registered yet!' if @authors.empty?
-    @authors.each do |author|
-      puts "ID: #{author.id}, Name: #{author.first_name} #{author.last_name}"
-    end
+    # puts 'Oops, no authors registered yet!' if @authors.empty?
+    # puts 'Oops, no authors registered yet!' if @things.authors.empty?
+    # @authors.each do |author|
+    #   puts "ID: #{author.id}, Name: #{author.first_name} #{author.last_name}"
+    # end
+
+    puts '***--------Authors List-----------***'
+    list(@things.authors)
+    puts '***----End of the Authors list-----***'
+
+    puts 'Press Enter to Continue'
+    gets.chomp
   end
 
   def add_game
@@ -256,19 +264,29 @@ class App
     puts 'Enter Last played Year: '
     last_played_at = gets.chomp
 
-    @games << Game.new(publish_date, multiplayer, last_played_at)
+    # @games << Game.new(publish_date, multiplayer, last_played_at)
+    game = Game.new(publish_date, multiplayer, last_played_at)
+    @things.add_game(game)
     puts 'Add game succeessful!'
+    puts 'Press enter to continue'
+    gets.chomp
   end
 
   def list_games
-    puts 'Oops, no games created yet!' if @games.empty?
-    @games.each do |game|
-      puts "ID: #{game.id}, Publish Date: #{game.publish_date}, "
-      puts "Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
-    end
-    return unless options.keys.include?(choice)
+    # puts 'Oops, no games created yet!' if @games.empty?
+    # puts 'Oops, no games created yet!' if @things.games.empty?
+    # @games.each do |game|
+    #   puts "ID: #{game.id}, Publish Date: #{game.publish_date}, "
+    #   puts "Multiplayer: #{game.multiplayer}, Last Played At: #{game.last_played_at}"
+    # end
+    # return unless options.keys.include?(choice)
+    # options[choice][:action].call
 
-    options[choice][:action].call
+    puts '------------Game List-----------'
+    list(@things.games)
+    puts '----------End of the Game List----------'
+    puts 'Press enter to continue'
+    gets.chomp
   end
 end
 # rubocop:enable Metrics/ClassLength
