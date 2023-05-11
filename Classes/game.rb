@@ -12,9 +12,6 @@ class Game < Item
   def as_hash
     {
       'id' => @id,
-      'label' => @label.nil? ? '' : @label.as_hash,
-      'source' => @source.nil? ? '' : @source.as_hash,
-      'archived' => @archived,
       'multiplayer' => @multiplayer,
       'last_played_at' => @last_played_at,
       'publish_date' => @publish_date
