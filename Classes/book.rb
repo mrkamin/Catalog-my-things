@@ -13,6 +13,7 @@ class Book < Item
     {
       'id' => @id,
       'label' => @label.nil? ? '' : @label.as_hash,
+      'source' => @source.nil? ? '' : @source.as_hash,
       'publish_date' => @publish_date,
       'archived' => @archived,
       'cover_state' => @cover_state,
