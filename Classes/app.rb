@@ -26,6 +26,17 @@ class App
     end
   end
 
+  def choos_label(choos: false)
+    list_labels(choos: choos)
+    puts 'Choos a label or type "n" for a new label'
+    input = gets.chomp
+    if input.downcase == 'n'
+      add_label
+      return @things.labels.last
+    end
+    @things.labels[input.to_i] unless @things.labels[input.to_i].nil?
+  end
+
   def add_book
     puts 'Please fill below book data:'
     puts 'Publish date:'
@@ -35,9 +46,21 @@ class App
     puts 'Cover state:'
     cover_state = gets.chomp
     book = Book.new(publish_date, publisher, cover_state)
+    label = choos_label(choos: true)
+    book.label = label if label.is_a? Label
     @things.add_book(book)
     puts 'Book added successfuly'
     puts 'Press enter to continue'
+    gets.chomp
+  end
+
+  def add_label
+    puts 'Please add a label:'
+    print 'Title: '
+    title = gets.chomp
+    @things.add_label(Label.new(title))
+    puts 'Label added successful'
+    puts 'Press Enter to continue'
     gets.chomp
   end
 
@@ -53,6 +76,7 @@ class App
     read_list('books.json') do |item|
       @things.add_book(Book.new(item['publish_date'], item['publisher'], item['cover_state']))
     end
+    read_list('labels.json') { |item| @things.add_label(Label.new(item['title'])) }
   end
 
   def read_list(file_name, &block)
@@ -65,6 +89,7 @@ class App
 
   def save_data
     save_list('books.json', @things.books)
+    save_list('labels.json', @things.labels)
   end
 
   def save_list(file_name, list)
@@ -87,11 +112,23 @@ class App
     gets.chomp
   end
 
+  def list_labels(choos: false)
+    puts '***--------Labels List-----------***'
+    list(@things.labels)
+    puts '***----End of the label list-----***'
+    return if choos
+
+    puts 'Press Enter to Continue'
+    gets.chomp
+  end
+
   def options
     {
       1 => { text: 'List all books', action: proc { list_books } },
-      2 => { text: 'Add a Book', action: proc { add_book } },
-      3 => { text: 'Exit App' }
+      2 => { text: 'List all Labels', action: proc { list_labels } },
+      3 => { text: 'Add a Book', action: proc { add_book } },
+      4 => { text: 'Add a Label', action: proc { add_label } },
+      5 => { text: 'Exit App' }
     }
   end
 
