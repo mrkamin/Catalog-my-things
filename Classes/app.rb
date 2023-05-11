@@ -48,6 +48,22 @@ class App
       list_authors
     when 12
       add_author
+    when 1
+      list_books
+    when 7
+      add_book
+    when 5
+      list_labels
+    when 10
+      add_label
+    when 2
+      list_albums
+    when 8
+      add_album
+    when 4
+      list_genres
+    when 11
+      add_genre
     when 0
       puts 'Thank you for using this app!'
       exit
@@ -78,8 +94,8 @@ class App
     publish_date = gets.chomp
     puts 'Enter Multiplayer: [Y/N]'
     multiplayer_choice = gets.chomp.downcase
-    multiplayer = true if multiplayer_choice = 'y'
-    multiplayer = false if multiplayer_choice = 'n'
+    multiplayer = true if multiplayer_choice == 'y'
+    multiplayer = false if multiplayer_choice == 'n'
     puts 'Enter Last played Year: '
     last_played_at = gets.chomp
 
