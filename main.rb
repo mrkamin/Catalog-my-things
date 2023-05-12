@@ -43,6 +43,7 @@ def main
   while (choice = gets.to_i)
     if choice.zero?
       puts 'Hope you enjoyed using this app. Good bye!'
+      app.save_data
       exit
     end
     method_name = ACTIONS[choice]

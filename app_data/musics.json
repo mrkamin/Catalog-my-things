@@ -1,16 +1,16 @@
 [
   {
-    "id": 164,
-    "publish_date": "G",
-    "name": "11/05/2023",
+    "id": 616,
+    "publish_date": "jjj",
+    "name": true,
     "archived": false,
     "on_spotify": null
   },
   {
-    "id": 347,
-    "publish_date": "B",
-    "name": "12/05/2023",
+    "id": 317,
+    "publish_date": "j",
+    "name": true,
     "archived": false,
-    "on_spotify": null
+    "on_spotify": "1/2/1990"
   }
 ]

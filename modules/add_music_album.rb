@@ -1,5 +1,6 @@
 require_relative '../Classes/genre'
 require_relative '../Classes/music'
+require_relative '../Classes/catalog'
 
 module AddMusicAlbum
   def add_a_music
@@ -18,7 +19,9 @@ module AddMusicAlbum
     genre = Genre.new(name)
     album = Music.new(album_name, on_spotify, publish_date)
     album.genre = genre
-    @Music.push(album)
+   
+    @things.add_music(album)
+
     puts 'Music album added successfully'
   end
 end

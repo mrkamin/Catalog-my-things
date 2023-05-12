@@ -9,8 +9,10 @@ class Label
   end
 
   def add_item(item)
-    @items << item
-    item.label = self
+    if item.is_a?(Item) && !@items.include?(item)
+      @items << item
+      item.label = self
+    end
   end
 
   def as_hash

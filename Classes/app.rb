@@ -16,7 +16,7 @@ require_relative '../modules/list_all_genres'
 require_relative '../modules/add_music_album'
 
 class App
-  include AddMusicAlbum
+ 
   include ListAllGenres
   include ListAllMusics
 
@@ -24,7 +24,7 @@ class App
     @things = Catalog.new
     read_all_data
   end
-
+  include AddMusicAlbum
   def enter_date
     loop do
       date = gets.chomp
@@ -49,12 +49,12 @@ class App
     read_list('books.json') do |item|
       @things.add_book(Book.new(item['publish_date'], item['cover_state'], item['publisher']))
     end
+    read_list('genres.json') { |item| @things.add_genre(Genre.new(item['name'])) }
     read_list('musics.json') do |item|
       @things.add_music(Music.new(item['publish_date'], item['name'], item['spotify']))
     end
-    read_list('authors.json') do |author|
-      @things.add_author(Author.new(author['first_name'], author['last_name']))
-    end
+    read_list('authors.json') { |item| @things.add_author(Author.new(item['first_name'], item['last_name'])) }
+   
     read_list('games.json') do |game|
       @things.add_game(Game.new(game['multiplayer'], game['last_played_at'], game['publish_date']))
     end
@@ -77,6 +77,7 @@ class App
     save_list('games.json', @things.games)
     save_list('authors.json', @things.authors)
     save_list('musics.json', @things.musics)
+    save_list('genres.json', @things.genres)
   end
 
   def save_list(file_name, list)
@@ -110,9 +111,28 @@ class App
       add_source
       return @things.sources.last
     end
-    @things.sources[input.to_i] unless @things.labels[input.to_i].nil?
+    @things.sources[input.to_i] unless @things.sources[input.to_i].nil?
   end
-
+  def choos_genre(choos: false)
+    list_genres(choos: choos)
+    puts 'Choos genre by number or enter "n" for a new genre'
+    input = gets.chomp
+    if input.downcase == 'n'
+      add_genre
+      return @things.genres.last
+    end
+    @things.genres[input.to_i] unless @things.genres[input.to_i].nil?
+  end
+  def choos_author(choos: false)
+    list_authors(choos: choos)
+    puts 'Choos author by number or enter "n" for a new author'
+    input = gets.chomp
+    if input.downcase == 'n'
+      add_author
+      return @things.authors.last
+    end
+    @things.authors[input.to_i] unless @things.authors[input.to_i].nil?
+  end
   def add_book
     puts 'Please fill below book data:'
     puts 'Publish date:'
@@ -121,7 +141,16 @@ class App
     publisher = gets.chomp
     puts 'Cover state:'
     cover_state = gets.chomp
-    book = Book.new(publish_date, publisher, cover_state)
+    book = Book.new( publisher, cover_state, publish_date)
+    genre = choos_genre(choos: true)
+    book.genre = genre if genre.is_a? Genre
+    source = choos_source(choos: true)
+    book.source = source if source.is_a? Source
+    label = choos_label(choos: true)
+    book.label = label if label.is_a? Label
+    author = choos_author(choos: true)
+    book.author = author if author.is_a? Author
+    
     @things.add_book(book)
     puts 'Book added successfuly'
     puts 'Press enter to continue'
@@ -151,7 +180,6 @@ class App
     list(@things.labels)
     puts '***----End of the label list-----***'
     return if choos
-
     puts 'Press Enter to Continue'
     gets.chomp
   end
@@ -188,12 +216,30 @@ class App
     gets.chomp
   end
 
-  def list_authors
+  def list_authors(choos: false)
     puts '***--------Authors List-----------***'
     list(@things.authors)
     puts '***----End of the Authors list-----***'
-
+    return if choos
     puts 'Press Enter to Continue'
+    gets.chomp
+  end
+  def add_genre
+    puts 'Please fill below genre data:'
+    print 'Name: '
+    name = gets.chomp
+    @things.add_genre(Genre.new(name))
+    puts 'Genre added successfuly'
+    puts 'Press enter to continue'
+    gets.chomp
+  end
+  def list_genres(choos: false)
+    puts '------------Genres List-----------'
+    list(@things.genres)
+    puts '----------End of the List----------'
+    return if choos
+
+    puts 'Press enter to continue'
     gets.chomp
   end
 

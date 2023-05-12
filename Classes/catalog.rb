@@ -27,7 +27,7 @@ class Catalog
     @musics << music
   end
 
-  def add_genres(genre)
+  def add_genre(genre)
     @genres << genre
   end
 
