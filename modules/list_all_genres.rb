@@ -1,14 +1,11 @@
-require 'set'
+# require 'set'
 
 module ListAllGenres
   def list_all_genres
-    puts 'Genres:'
-    genres = Set.new
-    @music.each do |music|
-      genres << music.genre.name.to_s
-    end
-    genres.each do |genre|
-      puts "- #{genre}"
-    end
+    puts '------------Genre List-----------'
+    list(@things.genres)
+    puts '----------End of the Genre List----------'
+    puts 'Press enter to continue'
+    gets.chomp
   end
 end
