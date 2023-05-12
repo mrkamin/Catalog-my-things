@@ -1,5 +1,4 @@
 require './Classes/app'
-# require_relative './Classes/app'
 
 def menu
   puts '
@@ -32,7 +31,7 @@ ACTIONS = {
   9 => :add_game,
   10 => :add_label,
   11 => :add_genre,
-  12 => :add_author,
+  12 => :add_author
 }.freeze
 
 def main
@@ -41,9 +40,8 @@ def main
   puts "********-------------------------********\n"
   menu
   app = App.new
-  # App.new
   while (choice = gets.to_i)
-    if choice == 0
+    if choice.zero?
       puts 'Hope you enjoyed using this app. Good bye!'
       exit
     end
