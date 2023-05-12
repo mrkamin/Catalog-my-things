@@ -1,6 +1,6 @@
 class Genre
-  attr_accessor :id
-  attr_reader :name, :items
+  attr_accessor :name, :items
+  attr_reader :id
 
   def initialize(name)
     @name = name
@@ -13,3 +13,9 @@ class Genre
     item.genre = self
   end
 
+  def as_hash
+    {
+      'name' => @name
+    }
+  end
+end
