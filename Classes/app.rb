@@ -59,7 +59,6 @@ class App
       return enter_date
     end
   end
-
   def choos_genre(choos: false)
     list_genres(choos: choos)
     puts 'Choos genre by number or enter "n" for a new genre'
@@ -70,7 +69,6 @@ class App
     end
     @things.genres[input.to_i] unless @things.genres[input.to_i].nil?
   end
-
   def add_music
     puts 'Please fill below music data:'
     puts 'Publish date:'
@@ -88,7 +86,6 @@ class App
     puts 'Press enter to continue'
     gets.chomp
   end
-
   def add_genre
     puts 'Please fill below genre data:'
     print 'Name: '
@@ -98,7 +95,6 @@ class App
     puts 'Press enter to continue'
     gets.chomp
   end
-
   def list(list)
     list.each_with_index do |item, idx|
       print "#{idx}-"
@@ -146,7 +142,6 @@ class App
     puts 'Press enter to continue'
     gets.chomp
   end
-
   def list_genres(choos: false)
     puts '------------Genres List-----------'
     list(@things.genres)
@@ -156,7 +151,6 @@ class App
     puts 'Press enter to continue'
     gets.chomp
   end
-
   def options
     {
       1 => { text: 'List all Musics', action: proc { list_musics } },
