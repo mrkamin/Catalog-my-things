@@ -20,5 +20,12 @@ describe 'Author' do
         expect(@author.last_name).to eq('Henschel')
       end
     end
+    describe '#items' do
+      it 'Should add an item to the item array' do
+        @item = Item.new('2022')
+        @author.add_item(@item)
+        expect(@author.items).to include(@item)
+      end
+    end
   end
 end
