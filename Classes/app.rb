@@ -60,6 +60,17 @@ class App
     end
   end
 
+  def choos_genre(choos: false)
+    list_genres(choos: choos)
+    puts 'Choos genre by number or enter "n" for a new genre'
+    input = gets.chomp
+    if input.downcase == 'n'
+      add_genre
+      return @things.genres.last
+    end
+    @things.genres[input.to_i] unless @things.genres[input.to_i].nil?
+  end
+
   def add_music
     puts 'Please fill below music data:'
     puts 'Publish date:'
@@ -70,8 +81,20 @@ class App
     it_is = gets[0].capitalize
     it_is = (it_is == 'Y')
     music = Music.new(name, publish_date, it_is)
+    genre = choos_genre(choos: true)
+    music.genre = genre if genre.is_a? Genre
     @things.add_music(music)
     puts 'Music added successfuly'
+    puts 'Press enter to continue'
+    gets.chomp
+  end
+
+  def add_genre
+    puts 'Please fill below genre data:'
+    print 'Name: '
+    name = gets.chomp
+    @things.add_genres(Genre.new(name))
+    puts 'Genre added successfuly'
     puts 'Press enter to continue'
     gets.chomp
   end
@@ -88,6 +111,7 @@ class App
     read_list('musics.json') do |item|
       @things.add_music(Music.new(item['publish_date'], item['name'], item['spotify']))
     end
+    read_list('genres.json') { |item| @things.add_genre(Genre.new(item['name'])) }
   end
 
   def read_list(file_name, &block)
@@ -100,6 +124,7 @@ class App
 
   def save_data
     save_list('musics.json', @things.musics)
+    save_list('genres.json', @things.genres)
   end
 
   def save_list(file_name, list)
@@ -122,11 +147,23 @@ class App
     gets.chomp
   end
 
+  def list_genres(choos: false)
+    puts '------------Genres List-----------'
+    list(@things.genres)
+    puts '----------End of the List----------'
+    return if choos
+
+    puts 'Press enter to continue'
+    gets.chomp
+  end
+
   def options
     {
       1 => { text: 'List all Musics', action: proc { list_musics } },
-      2 => { text: 'Add a Music', action: proc { add_music } },
-      3 => { text: 'Exit App' }
+      2 => { text: 'List all Genres', action: proc { list_genres } },
+      3 => { text: 'Add a Music', action: proc { add_music } },
+      4 => { text: 'Add a Genre', action: proc { add_genre } },
+      5 => { text: 'Exit App' }
     }
   end
 
