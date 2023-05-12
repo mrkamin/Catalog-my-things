@@ -1,5 +1,5 @@
 class Catalog
-  attr_reader :books, :labels, :sources, :authors, :games, :musics
+  attr_reader :books, :labels, :sources, :authors, :games, :musics, :genres
 
   def initialize
     @books = []
@@ -8,10 +8,27 @@ class Catalog
     @games = []
     @authors = []
     @musics = []
+    @genres = []
+  end
+
+  def add_label(label)
+    @labels << label
+  end
+
+  def add_source(source)
+    @sources << source
+  end
+
+  def add_book(book)
+    @books << book
   end
 
   def add_music(music)
     @musics << music
+  end
+
+  def add_genres(genre)
+    @genres << genre
   end
 
   def add_game(game)
