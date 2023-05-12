@@ -1,11 +1,61 @@
 require './Classes/app'
 # require_relative './Classes/app'
 
+def menu
+  puts '
+  1: List all books
+  2: List all musics
+  3: List all games
+  4: List all labels
+  5: List all genres
+  6: List all authors
+  7: Add a book
+  8: Add a music
+  9: Add a game
+  10: Add a label
+  11: Add a genre
+  12: Add a author
+  0: Exit
+  '
+  puts 'Please kindly choose a number: '
+end
+
+ACTIONS = {
+  1 => :list_books,
+  2 => :list_all_musics,
+  3 => :list_games,
+  4 => :list_labels,
+  5 => :list_all_genres,
+  6 => :list_authors,
+  7 => :add_book,
+  8 => :add_a_music,
+  9 => :add_game,
+  10 => :add_label,
+  11 => :add_genre,
+  12 => :add_author,
+}.freeze
+
 def main
   puts '********-------------------------********'
   puts '       Welcome to  Catalog of Things      '
   puts "********-------------------------********\n"
-  App.new
+  menu
+  app = App.new
+  # App.new
+  while (choice = gets.to_i)
+    if choice == 0
+      puts 'Hope you enjoyed using this app. Good bye!'
+      exit
+    end
+    method_name = ACTIONS[choice]
+    if method_name.nil?
+      puts 'Incorrect! Must be between 1-12. Please try again...'
+    else
+      method_tocall = app.method(method_name)
+      method_tocall.call
+    end
+    menu
+  end
 end
 
 main

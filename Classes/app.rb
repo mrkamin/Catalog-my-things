@@ -15,14 +15,7 @@ require_relative '../modules/list_all_music_album'
 require_relative '../modules/list_all_genres'
 require_relative '../modules/add_music_album'
 
-ACTIONS = {
-  1 => :list_all_musics,
-  2 => :list_all_genres,
-  3 => :add_a_music
-}.freeze
-
 class App
-  include Menu
   include AddMusicAlbum
   include ListAllGenres
   include ListAllMusics
@@ -30,7 +23,7 @@ class App
   def initialize
     @things = Catalog.new
     read_all_data
-    print_chose_menu_list
+    # print_chose_menu_list
   end
 
   def enter_date
@@ -99,72 +92,72 @@ class App
     end
   end
 
-  def options
-    {
-      1 => { text: 'List of all books', action: proc { list_books } },
-      2 => { text: 'List of all music', action: proc { list_all_musics } },
-      3 => { text: 'List of all games', action: proc { list_games } },
-      4 => { text: 'List of all labels', action: proc { list_labels } },
-      5 => { text: 'List of all genres', action: proc { list_all_genres } },
-      6 => { text: 'List of all Authors', action: proc { list_authors } },
-      7 => { text: 'Add a book', action: proc { add_book } },
-      8 => { text: 'Add a music', action: proc { add_a_music } },
-      9 => { text: 'Add a game', action: proc { add_game } },
-      10 => { text: 'Add a label', action: proc { add_label } },
-      11 => { text: 'Add a genre', action: proc { add_genre } },
-      12 => { text: 'Add an author', action: proc { add_author } },
-      0 => { text: 'Exit from App' }
-    }
-  end
+  # def options
+  #   {
+  #     1 => { text: 'List of all books', action: proc { list_books } },
+  #     2 => { text: 'List of all music', action: proc { list_all_musics } },
+  #     3 => { text: 'List of all games', action: proc { list_games } },
+  #     4 => { text: 'List of all labels', action: proc { list_labels } },
+  #     5 => { text: 'List of all genres', action: proc { list_all_genres } },
+  #     6 => { text: 'List of all authors', action: proc { list_authors } },
+  #     7 => { text: 'Add a book', action: proc { add_book } },
+  #     8 => { text: 'Add a music', action: proc { add_a_music } },
+  #     9 => { text: 'Add a game', action: proc { add_game } },
+  #     10 => { text: 'Add a label', action: proc { add_label } },
+  #     11 => { text: 'Add a genre', action: proc { add_genre } },
+  #     12 => { text: 'Add an author', action: proc { add_author } },
+  #     0 => { text: 'Exit from App' }
+  #   }
+  # end
 
-  def print_chose_menu_list
-    loop do
-      options.each { |k, v| print "#{k} - #{v[:text]} \n" }
-      choice = gets.chomp.to_i
-      if choice == options.keys.last
-        puts "\nThank you for using the app\n"
-        save_data
-        break
-      end
-      puts "\e[H\e[2J"
-      choice_menu(choice)
-      puts "\e[H\e[2J"
-    end
-  end
+  # def print_chose_menu_list
+  #   loop do
+  #     options.each { |k, v| print "#{k} - #{v[:text]} \n" }
+  #     choice = gets.chomp.to_i
+  #     if choice == options.keys.last
+  #       puts "\nThank you for using the app\n"
+  #       save_data
+  #       break
+  #     end
+  #     puts "\e[H\e[2J"
+  #     choice_menu(choice)
+  #     puts "\e[H\e[2J"
+  #   end
+  # end
 
-  def choice_menu(choice)
-    case choice
-    when 3
-      list_games
-    when 9
-      add_game
-    when 6
-      list_authors
-    when 12
-      add_author
-    when 1
-      list_books
-    when 7
-      add_book
-    when 4
-      list_labels
-    when 10
-      add_label
-    when 2
-      list_all_musics
-    when 8
-      add_a_music
-    when 5
-      list_all_genres
-    when 11
-      add_genre
-    when 0
-      puts 'Thank you for using this app!'
-      exit
-    else
-      puts 'Invalid choice!'
-    end
-  end
+  # def choice_menu(choice)
+  #   case choice
+  #   when 3
+  #     list_games
+  #   when 9
+  #     add_game
+  #   when 6
+  #     list_authors
+  #   when 12
+  #     add_author
+  #   when 1
+  #     list_books
+  #   when 7
+  #     add_book
+  #   when 4
+  #     list_labels
+  #   when 10
+  #     add_label
+  #   when 2
+  #     list_all_musics
+  #   when 8
+  #     add_a_music
+  #   when 5
+  #     list_all_genres
+  #   when 11
+  #     add_genre
+  #   when 0
+  #     puts 'Thank you for using this app!'
+  #     exit
+  #   else
+  #     puts 'Invalid choice!'
+  #   end
+  # end
 
   def choos_label(choos: false)
     list_labels(choos: choos)
