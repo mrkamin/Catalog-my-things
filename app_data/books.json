@@ -1,48 +1,46 @@
 [
   {
-    "id": 95,
+    "id": 415,
     "genre": "",
     "author": "",
     "source": "",
     "label": "",
-    "publish_date": "1/1/1990",
+    "publish_date": "kajsdfkl",
     "archived": false,
-    "publisher": "kajsdfkl",
+    "publisher": "1/1/1990",
     "cover_state": ";asdjf"
   },
   {
-    "id": 86,
+    "id": 160,
     "genre": "",
     "author": "",
     "source": "",
     "label": "",
-    "publish_date": "1/1/1990",
+    "publish_date": "bad",
     "archived": false,
-    "publisher": "bad",
+    "publisher": "1/1/1990",
     "cover_state": "rk"
   },
   {
-    "id": 70,
+    "id": 178,
     "genre": "",
     "author": "",
     "source": "",
     "label": "",
-    "publish_date": "new_guy",
+    "publish_date": "1/1/1990",
     "archived": false,
-    "publisher": "1/1/1990",
+    "publisher": "new_guy",
     "cover_state": ""
   },
   {
-    "id": 547,
-    "genre": "#<Genre:0x00000250409f0708>",
-    "author": "#<Author:0x000002504076f560>",
-    "source": "#<Source:0x00000250406eef00>",
-    "label": {
-      "title": "hhhh"
-    },
-    "publish_date": "1/1/1990",
+    "id": 428,
+    "genre": "",
+    "author": "",
+    "source": "",
+    "label": "",
+    "publish_date": ";;",
     "archived": false,
-    "publisher": ";;",
+    "publisher": "1/1/1990",
     "cover_state": ""
   }
 ]

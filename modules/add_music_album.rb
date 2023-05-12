@@ -19,7 +19,7 @@ module AddMusicAlbum
     genre = Genre.new(name)
     album = Music.new(album_name, on_spotify, publish_date)
     album.genre = genre
-   
+
     @things.add_music(album)
 
     puts 'Music album added successfully'

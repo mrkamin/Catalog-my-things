@@ -16,7 +16,6 @@ require_relative '../modules/list_all_genres'
 require_relative '../modules/add_music_album'
 
 class App
- 
   include ListAllGenres
   include ListAllMusics
 
@@ -54,7 +53,7 @@ class App
       @things.add_music(Music.new(item['publish_date'], item['name'], item['spotify']))
     end
     read_list('authors.json') { |item| @things.add_author(Author.new(item['first_name'], item['last_name'])) }
-   
+
     read_list('games.json') do |game|
       @things.add_game(Game.new(game['multiplayer'], game['last_played_at'], game['publish_date']))
     end
@@ -113,6 +112,7 @@ class App
     end
     @things.sources[input.to_i] unless @things.sources[input.to_i].nil?
   end
+
   def choos_genre(choos: false)
     list_genres(choos: choos)
     puts 'Choos genre by number or enter "n" for a new genre'
@@ -123,6 +123,7 @@ class App
     end
     @things.genres[input.to_i] unless @things.genres[input.to_i].nil?
   end
+
   def choos_author(choos: false)
     list_authors(choos: choos)
     puts 'Choos author by number or enter "n" for a new author'
@@ -133,6 +134,7 @@ class App
     end
     @things.authors[input.to_i] unless @things.authors[input.to_i].nil?
   end
+
   def add_book
     puts 'Please fill below book data:'
     puts 'Publish date:'
@@ -141,7 +143,7 @@ class App
     publisher = gets.chomp
     puts 'Cover state:'
     cover_state = gets.chomp
-    book = Book.new( publisher, cover_state, publish_date)
+    book = Book.new(publisher, cover_state, publish_date)
     genre = choos_genre(choos: true)
     book.genre = genre if genre.is_a? Genre
     source = choos_source(choos: true)
@@ -150,7 +152,7 @@ class App
     book.label = label if label.is_a? Label
     author = choos_author(choos: true)
     book.author = author if author.is_a? Author
-    
+
     @things.add_book(book)
     puts 'Book added successfuly'
     puts 'Press enter to continue'
@@ -180,6 +182,7 @@ class App
     list(@things.labels)
     puts '***----End of the label list-----***'
     return if choos
+
     puts 'Press Enter to Continue'
     gets.chomp
   end
@@ -221,9 +224,11 @@ class App
     list(@things.authors)
     puts '***----End of the Authors list-----***'
     return if choos
+
     puts 'Press Enter to Continue'
     gets.chomp
   end
+
   def add_genre
     puts 'Please fill below genre data:'
     print 'Name: '
@@ -233,6 +238,7 @@ class App
     puts 'Press enter to continue'
     gets.chomp
   end
+
   def list_genres(choos: false)
     puts '------------Genres List-----------'
     list(@things.genres)

@@ -1,14 +1,14 @@
 [
   {
-    "id": 275,
-    "multiplayer": true,
-    "last_played_at": "2000",
-    "publish_date": "1990"
+    "id": 219,
+    "multiplayer": "2000",
+    "last_played_at": "1990",
+    "publish_date": true
   },
   {
-    "id": 920,
-    "multiplayer": true,
-    "last_played_at": "2000",
-    "publish_date": "1990"
+    "id": 1000,
+    "multiplayer": "2000",
+    "last_played_at": "1990",
+    "publish_date": true
   }
 ]
