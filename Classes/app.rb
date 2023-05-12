@@ -111,7 +111,7 @@ class App
     read_list('musics.json') do |item|
       @things.add_music(Music.new(item['publish_date'], item['name'], item['spotify']))
     end
-    read_list('genres.json') { |item| @things.add_genre(Genre.new(item['name'])) }
+    read_list('genres.json') { |item| @things.add_genres(Genre.new(item['name'])) }
   end
 
   def read_list(file_name, &block)
