@@ -9,7 +9,8 @@ class Catalog
   def add_music(music)
     @musics << music
   end
-  def add_genres(genre) 
-   @genres << genre
+
+  def add_genres(genre)
+    @genres << genre
   end
 end
