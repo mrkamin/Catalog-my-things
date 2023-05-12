@@ -6,7 +6,7 @@ describe 'Author' do
   end
   context 'Testing the author and its methods' do
     describe '#new' do
-      it 'takes three parameters and returns a Student object' do
+      it 'takes two parameters and returns an Author object' do
         expect(@author).to be_an_instance_of Author
       end
     end
