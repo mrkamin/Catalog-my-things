@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "publish_date": "1/1/1990",
+    "archived": false,
+    "on_spotify": true,
+    "genre": "",
+    "author": "",
+    "label": ""
+  },
+  {
+    "id": 1,
+    "publish_date": "2000/1/1",
+    "archived": false,
+    "on_spotify": true,
+    "genre": "",
+    "author": "",
+    "label": ""
+  },
+  {
+    "id": 205,
+    "publish_date": "2000/1/1",
+    "archived": false,
+    "on_spotify": true,
+    "genre": "",
+    "author": "",
+    "label": ""
+  },
+  {
+    "id": 455,
+    "publish_date": "2022/1/1",
+    "archived": false,
+    "on_spotify": true,
+    "genre": "",
+    "author": "",
+    "label": ""
+  }
+]
