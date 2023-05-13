@@ -1,7 +1,5 @@
-require_relative './item'
-
 class Author
-  attr_accessor :first_name, :last_name, :items
+  attr_accessor :first_name, :last_name
   attr_reader :id
 
   def initialize(first_name, last_name)
@@ -12,12 +10,13 @@ class Author
   end
 
   def add_item(item)
+    @items << item unless @item.include?(item)
     item.author = self
-    @items << item
   end
 
   def as_hash
     {
+      'id' => @id,
       'first_name' => @first_name,
       'last_name' => @last_name
     }

@@ -1,46 +1,60 @@
 [
   {
-    "id": 415,
-    "genre": "",
-    "author": "",
-    "source": "",
-    "label": "",
-    "publish_date": "kajsdfkl",
-    "archived": false,
-    "publisher": "1/1/1990",
-    "cover_state": ";asdjf"
-  },
-  {
-    "id": 160,
-    "genre": "",
-    "author": "",
-    "source": "",
-    "label": "",
-    "publish_date": "bad",
-    "archived": false,
-    "publisher": "1/1/1990",
-    "cover_state": "rk"
-  },
-  {
-    "id": 178,
-    "genre": "",
-    "author": "",
-    "source": "",
-    "label": "",
+    "id": 946,
     "publish_date": "1/1/1990",
     "archived": false,
-    "publisher": "new_guy",
-    "cover_state": ""
-  },
-  {
-    "id": 428,
+    "publisher": "ll",
+    "cover_state": "bad",
     "genre": "",
     "author": "",
     "source": "",
-    "label": "",
-    "publish_date": ";;",
+    "label": ""
+  },
+  {
+    "id": 982,
+    "publish_date": "2000/1/1",
     "archived": false,
-    "publisher": "1/1/1990",
-    "cover_state": ""
+    "publisher": "k",
+    "cover_state": "k",
+    "genre": "",
+    "author": "",
+    "source": "",
+    "label": ""
+  },
+  {
+    "id": 543,
+    "publish_date": "200/1/1",
+    "archived": false,
+    "publisher": "Kambiz",
+    "cover_state": "bad",
+    "genre": "",
+    "author": "",
+    "source": "",
+    "label": ""
+  },
+  {
+    "id": 532,
+    "publish_date": "2022/1/1",
+    "archived": false,
+    "publisher": "francis",
+    "cover_state": "bad",
+    "genre": "",
+    "author": "",
+    "source": "",
+    "label": ""
+  },
+  {
+    "id": 373,
+    "publish_date": "200/1/1",
+    "archived": false,
+    "publisher": "ff",
+    "cover_state": "sfg",
+    "genre": "#<Genre:0x0000023f5a64b4c8>",
+    "author": "",
+    "source": "",
+    "label": {
+      "title": "ttt",
+      "color": "klj"
+    }
   }
 ]
