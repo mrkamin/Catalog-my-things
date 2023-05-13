@@ -1,20 +1,22 @@
 [
   {
-    "title": "CCNA"
+    "title": "html",
+    "color": "red"
   },
   {
-    "title": "js"
+    "title": "ttt",
+    "color": "klj"
   },
   {
-    "title": "html"
+    "title": "html",
+    "color": "reed"
   },
   {
-    "title": "Css"
+    "title": "css",
+    "color": "blue"
   },
   {
-    "title": "Java"
-  },
-  {
-    "title": "ruby"
+    "title": "js",
+    "color": "white"
   }
 ]

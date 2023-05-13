@@ -1,35 +1,37 @@
-require_relative '../Classes/game'
-require_relative '../Classes/book'
+require_relative '../classes/game'
 
-describe 'Game' do
+describe 'Unit Tests for Game' do
   before :each do
-    @game = Game.new '2013', true, '2020'
+    @game = Game.new('1990/08/20', '2009/05/02', 'No')
   end
-  context 'Testing the game and its methods' do
-    describe '#new' do
-      it 'takes three parameters and returns a Game object' do
-        expect(@game).to be_an_instance_of Game
+
+  context 'initialize object' do
+    it 'should be a Game instance' do
+      expect(@game).to be_instance_of Game
+    end
+
+    it 'should not be an Item instance' do
+      expect(@game).not_to be_instance_of Item
+    end
+
+    it 'should be an Item instace' do
+      expect(@game).to be_kind_of Item
+    end
+  end
+
+  context 'when was game last played' do
+    it 'should be "2009/05/02"' do
+      expect(@game.last_played).to eql '2009/05/02'
+    end
+
+    context 'when was game published' do
+      it 'should be "1990/08/20"' do
+        expect(@game.publish_date).to eql '1990/08/20'
       end
     end
-    describe '#publish_date' do
-      it 'returns the publish date' do
-        expect(@game.publish_date).to eq('2013')
-      end
-    end
-    describe '#multiplayer' do
-      it 'returns the multiplayer' do
-        expect(@game.multiplayer).to eq(true)
-      end
-    end
-    describe '#last_played_at' do
-      it 'returns the last played year' do
-        expect(@game.last_played_at).to eq('2020')
-      end
-    end
-    describe '#can_be_archived?' do
-      it 'returns true when last played date is older than two years' do
-        book = Book.new '01/01/2013', '', ''
-        expect(book.can_be_archived?).to eq(true)
+    context 'Multiplayer Game' do
+      it 'should be "No"' do
+        expect(@game.multiplayer).to eql 'No'
       end
     end
   end
