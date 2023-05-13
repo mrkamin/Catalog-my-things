@@ -1,31 +1,25 @@
-require_relative '../Classes/author'
+require_relative '../classes/author'
 
-describe 'Author' do
+describe 'Unit Tests for Author' do
   before :each do
-    @author = Author.new 'Milton', 'Henschel'
+    @author = Author.new('rafi', 'amin')
   end
-  context 'Testing the author and its methods' do
-    describe '#new' do
-      it 'takes two parameters and returns an Author object' do
-        expect(@author).to be_an_instance_of Author
-      end
+
+  context 'initialize' do
+    it 'should be creat an Author' do
+      expect(@author).to be_instance_of Author
     end
-    describe '#first_name' do
-      it 'returns the first name' do
-        expect(@author.first_name).to eq('Milton')
-      end
+  end
+
+  context 'First name' do
+    it 'should be "rafi"' do
+      expect(@author.first_name).to eql 'rafi'
     end
-    describe '#last_name' do
-      it 'returns the last name' do
-        expect(@author.last_name).to eq('Henschel')
-      end
-    end
-    describe '#items' do
-      it 'Should add an item to the item array' do
-        @item = Item.new('2022')
-        @author.add_item(@item)
-        expect(@author.items).to include(@item)
-      end
+  end
+
+  context 'Last name of author' do
+    it 'should be amin' do
+      expect(@author.last_name).to eql 'amin'
     end
   end
 end

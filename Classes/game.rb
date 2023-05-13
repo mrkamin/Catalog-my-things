@@ -1,27 +1,29 @@
+require 'date'
 require_relative './item'
 
 class Game < Item
-  attr_accessor :multiplayer, :last_played_at, :publish_date
+  attr_accessor :publish_date, :last_played, :multiplayer
+  attr_reader :id
 
-  def initialize(publish_date, multiplayer, last_played_at)
+  def initialize(publish_date, last_played, multiplayer)
     super(publish_date)
+    @last_played = last_played
     @multiplayer = multiplayer
-    @last_played_at = last_played_at
+    @archived = can_be_archived?
   end
 
   def as_hash
     {
-      'id' => @id,
+      'publish_date' => @publish_date,
+      'last_played' => @last_played,
       'multiplayer' => @multiplayer,
-      'last_played_at' => @last_played_at,
-      'publish_date' => @publish_date
+      'archived' => @archived
     }
   end
 
   private
 
   def can_be_archived?
-    present_date = Time.now.year
-    super && present_date - last_played_at > 2
+    @archived = super || Date.today - Date.parse(@last_played) > 2 * 365
   end
 end
